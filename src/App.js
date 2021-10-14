@@ -5,12 +5,13 @@ import Auth from "./components/Auth";
 import Counter from "./components/Counter";
 
 function App() {
-  return;
-  <Fragment>
-    <Header />
-    <Auth />
-    <Counter />;
-  </Fragment>;
+  return (
+    <Fragment>
+      <Header />
+      <Auth />
+      <Counter />
+    </Fragment>
+  );
 }
 
 export default App;
