@@ -5,7 +5,7 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { uiActions } from "./store/ui-slice";
+import { sendCartData } from "./store/cart-slice";
 
 let isInitial = true;
 
@@ -20,42 +20,8 @@ function App() {
       isInitial = false;
       return;
     }
-
-    const sendCartData = async () => {
-      dispatch(
-        uiActions.notif({
-          status: "pending",
-          title: "Sending...",
-          message: "sending data...",
-        })
-      );
-      const response = await fetch(
-        "https://react-http-89fad-default-rtdb.asia-southeast1.firebasedatabase.app/cart.json",
-        { method: "PUT", body: JSON.stringify(cart) }
-      );
-
-      if (!response.ok) {
-        throw new Error("gagal kirim data...");
-      }
-
-      dispatch(
-        uiActions.notif({
-          status: "success",
-          title: "success...",
-          message: "berhasil kirim data...",
-        })
-      );
-    };
-    sendCartData().catch(() => {
-      dispatch(
-        uiActions.notif({
-          status: "error",
-          title: "error..",
-          message: "gagal kirim data...",
-        })
-      );
-    });
-  }, [cart]);
+    dispatch(sendCartData(cart));
+  }, [cart, dispatch]);
 
   return (
     <Fragment>
